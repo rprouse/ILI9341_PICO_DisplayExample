@@ -1,0 +1,24 @@
+{
+  "cmake.configureOnOpen": false,
+  "cmake.statusbar.advanced": {
+    "debug" : {
+      "visibility": "hidden"
+              },
+    "launch" : {
+      "visibility": "hidden"
+               },
+    "build" : {
+      "visibility": "hidden"
+               },
+    "buildTarget" : {
+      "visibility": "hidden"
+               },
+    },
+    "files.associations": {
+      "*.config": "xml",
+      "*.saproj": "xml",
+      "*.build": "xml",
+      "gfx.h": "c",
+      "ili9341.h": "c"
+    },
+}
