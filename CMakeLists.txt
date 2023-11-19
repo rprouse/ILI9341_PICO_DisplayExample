@@ -33,8 +33,8 @@ pico_set_program_version(DisplayTest "0.1")
 pico_enable_stdio_uart(DisplayTest 0)
 pico_enable_stdio_usb(DisplayTest 1)
 
-add_subdirectory(ili9341)
-add_subdirectory(gfx)
+add_subdirectory(lib/ili9341)
+add_subdirectory(lib/gfx)
 
 # Add the standard library to the build
 target_link_libraries(DisplayTest

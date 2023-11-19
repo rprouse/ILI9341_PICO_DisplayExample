@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "pico/stdlib.h"
-#include "ili9341/ili9341.h"
-#include "gfx/gfx.h"
+#include "lib/ili9341/ili9341.h"
+#include "lib/gfx/gfx.h"
 
 #define MARGIN 16
 #define INDENT (MARGIN + 4)
