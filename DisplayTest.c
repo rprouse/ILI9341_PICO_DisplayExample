@@ -8,8 +8,11 @@
 #define INDENT (MARGIN + 4)
 #define LINE_HEIGHT 10
 #define DELAY 10
-#define BACKGROUND ILI9341_BLUE
-#define FOREGROUND ILI9341_CYAN
+
+// Colors are in 565 (FFFF) format. To convert from RGB888 to RGB565, use:
+//   ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
+#define BACKGROUND 0x1052
+#define FOREGROUND 0x73BF
 
 void printLine(uint16_t x, uint16_t y, const char *line)
 {
