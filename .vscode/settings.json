@@ -18,7 +18,6 @@
       "*.config": "xml",
       "*.saproj": "xml",
       "*.build": "xml",
-      "gfx.h": "c",
-      "ili9341.h": "c"
+      "*.h": "c"
     },
 }

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "pico/stdlib.h"
-#include "lib/ili9341/ili9341.h"
-#include "lib/gfx/gfx.h"
+#include "ili9341.h"
+#include "gfx.h"
 
 //#define PICO_BREADBOARD_KIT 1
 
@@ -16,6 +16,7 @@
 #define TFT_CS          13
 #define TFT_BACKLIGHT   255 // hardwired to 3.3v
 #else
+#define USE_SD_CARD     1
 #define TFT_SCLK        18
 #define TFT_MOSI        19
 #define TFT_MISO        255 // Not required, used for DC...
@@ -24,6 +25,16 @@
 #define TFT_CS          17
 #define TFT_BACKLIGHT   255 // hardwired to 3.3v
 #endif
+
+#define TFT_WIDTH       320
+#define TFT_HEIGHT      240
+#define TFT_ROTATION    3
+
+// Pin definitions for the SD card
+#define SD_SCLK         10
+#define SD_MOSI         11
+#define SD_MISO         12
+#define SD_CS           13
 
 #define MARGIN 16
 #define INDENT (MARGIN + 4)
@@ -55,7 +66,7 @@ int main()
     puts("Initializing display...");
     LCD_setPins(TFT_DC, TFT_CS, TFT_RST, TFT_SCLK, TFT_MOSI);
     LCD_initDisplay();
-    LCD_setRotation(3);
+    LCD_setRotation(TFT_ROTATION);
 
     // Initialize GFX
     puts("Initializing graphics...");
