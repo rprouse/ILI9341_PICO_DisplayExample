@@ -4,6 +4,27 @@
 #include "lib/ili9341/ili9341.h"
 #include "lib/gfx/gfx.h"
 
+//#define PICO_BREADBOARD_KIT 1
+
+// Pin definitions for the LCD
+#ifdef PICO_BREADBOARD_KIT
+#define TFT_SCLK        6
+#define TFT_MOSI        7
+#define TFT_MISO        255 // Not required, used for DC...
+#define TFT_DC          15
+#define TFT_RST         14
+#define TFT_CS          13
+#define TFT_BACKLIGHT   255 // hardwired to 3.3v
+#else
+#define TFT_SCLK        18
+#define TFT_MOSI        19
+#define TFT_MISO        255 // Not required, used for DC...
+#define TFT_DC          16
+#define TFT_RST         21
+#define TFT_CS          17
+#define TFT_BACKLIGHT   255 // hardwired to 3.3v
+#endif
+
 #define MARGIN 16
 #define INDENT (MARGIN + 4)
 #define LINE_HEIGHT 10
@@ -32,7 +53,7 @@ int main()
 
     // Initialize display
     puts("Initializing display...");
-    LCD_setPins(15, 13, 14, 6, 7);
+    LCD_setPins(TFT_DC, TFT_CS, TFT_RST, TFT_SCLK, TFT_MOSI);
     LCD_initDisplay();
     LCD_setRotation(3);
 
