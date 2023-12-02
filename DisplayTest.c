@@ -4,7 +4,7 @@
 #include "ili9341.h"
 #include "gfx.h"
 
-//#define PICO_BREADBOARD_KIT 1
+#define PICO_BREADBOARD_KIT 1
 
 // Pin definitions for the LCD
 #ifdef PICO_BREADBOARD_KIT
