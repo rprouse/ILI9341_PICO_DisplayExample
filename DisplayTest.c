@@ -39,7 +39,7 @@
 #define MARGIN 16
 #define INDENT (MARGIN + 4)
 #define LINE_HEIGHT 10
-#define DELAY 10
+#define DELAY 5
 
 // Colors are in 565 (FFFF) format. To convert from RGB888 to RGB565, use:
 //   ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
@@ -87,9 +87,12 @@ int main()
     while (true)
     {
       puts("Ping...");
-      sleep_ms(1000);
-      puts("Pong...");
-      sleep_ms(1000);
+      GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, BACKGROUND);
+    GFX_flush();
+      sleep_ms(500);
+      GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, FOREGROUND);
+    GFX_flush();
+      sleep_ms(500);
     }
 
     return 0;

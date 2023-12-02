@@ -2,6 +2,13 @@
 
 Demonstration code for using a Raspberry Pi Pico with common TFT SPI boards.
 
+Before building, you must fetch the git submodules.
+
+```sh
+git submodule init
+git submodule update
+```
+
 ![TFT SPI 240x320 Display](./imgs/tft_spi_display.jpg)
 
 I have it set up with the pin-out of the version that comes on a cheap
