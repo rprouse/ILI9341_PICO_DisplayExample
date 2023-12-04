@@ -38,7 +38,7 @@
 
 #define MARGIN 16
 #define INDENT (MARGIN + 4)
-#define LINE_HEIGHT 10
+#define LINE_HEIGHT 8
 #define DELAY 5
 
 // Colors are in 565 (FFFF) format. To convert from RGB888 to RGB565, use:
@@ -66,9 +66,9 @@ void InitializeDisplay()
     LCD_initDisplay();
     LCD_setRotation(TFT_ROTATION);
     GFX_createFramebuf();
-    GFX_setClearColor(FOREGROUND);
-    GFX_setTextColor(FOREGROUND);
-    GFX_setTextBack(BACKGROUND);
+    //GFX_setClearColor(BACKGROUND);
+    //GFX_setTextBack(BACKGROUND);
+    //GFX_setTextColor(FOREGROUND);
     GFX_clearScreen();
 }
 
@@ -98,12 +98,39 @@ void Commodore64()
     }
 }
 
+void Terminal()
+{
+    int currentLine = 0;
+
+    int w = GFX_getWidth();
+    int h = GFX_getHeight();
+
+    GFX_printf("Screen size: %d x %d\n", w, h);
+    currentLine++;
+    GFX_flush();
+
+    for (int i = 1; i < 100; i++)
+    {
+      currentLine++;
+      if (currentLine * LINE_HEIGHT > h)
+      {
+        GFX_scrollUp(LINE_HEIGHT);
+        GFX_setCursor(0, h - LINE_HEIGHT);
+        currentLine--;
+      }
+      GFX_printf("Line %d\n", i);
+      GFX_flush();
+      sleep_ms(DELAY);
+    }
+}
+
 int main()
 {
     stdio_init_all();
 
     InitializeDisplay();
-    Commodore64();
+    //Commodore64();
+    Terminal();
 
     return 0;
 }
