@@ -58,24 +58,25 @@ void printLine(uint16_t x, uint16_t y, const char *line)
     }
 }
 
-int main()
+void InitializeDisplay()
 {
-    stdio_init_all();
-
     // Initialize display
     puts("Initializing display...");
     LCD_setPins(TFT_DC, TFT_CS, TFT_RST, TFT_SCLK, TFT_MOSI);
     LCD_initDisplay();
     LCD_setRotation(TFT_ROTATION);
-
-    // Initialize GFX
-    puts("Initializing graphics...");
     GFX_createFramebuf();
     GFX_setClearColor(FOREGROUND);
-    GFX_clearScreen();
-    GFX_fillRect(MARGIN * 2, MARGIN, GFX_getWidth() - MARGIN * 4, GFX_getHeight() - MARGIN * 2, BACKGROUND);
     GFX_setTextColor(FOREGROUND);
     GFX_setTextBack(BACKGROUND);
+    GFX_clearScreen();
+}
+
+void Commodore64()
+{
+    // Initialize GFX
+    puts("Initializing graphics...");
+    GFX_fillRect(MARGIN * 2, MARGIN, GFX_getWidth() - MARGIN * 4, GFX_getHeight() - MARGIN * 2, BACKGROUND);
     GFX_flush();
 
     // Draw some text
@@ -95,6 +96,14 @@ int main()
       GFX_flush();
       sleep_ms(500);
     }
+}
+
+int main()
+{
+    stdio_init_all();
+
+    InitializeDisplay();
+    Commodore64();
 
     return 0;
 }
