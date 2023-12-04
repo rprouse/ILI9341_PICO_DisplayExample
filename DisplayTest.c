@@ -88,10 +88,11 @@ int main()
     {
       puts("Ping...");
       GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, BACKGROUND);
-    GFX_flush();
+      GFX_flush();
       sleep_ms(500);
+
       GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, FOREGROUND);
-    GFX_flush();
+      GFX_flush();
       sleep_ms(500);
     }
 
