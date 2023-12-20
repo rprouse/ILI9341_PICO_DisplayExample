@@ -11,8 +11,8 @@ void printLine(uint16_t x, uint16_t y, const char *line)
     GFX_setCursor(x, y);
     for (int i = 0; i < len; i++)
     {
-      GFX_write(line[i]);
-      GFX_flush();
+        GFX_write(line[i]);
+        GFX_flush();
     }
 }
 
@@ -45,14 +45,14 @@ void Commodore64()
 
     while (true)
     {
-      puts("Ping...");
-      GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, BACKGROUND);
-      GFX_flush();
-      sleep_ms(500);
+        puts("Ping...");
+        GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, BACKGROUND);
+        GFX_flush();
+        sleep_ms(500);
 
-      GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, FOREGROUND);
-      GFX_flush();
-      sleep_ms(500);
+        GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, FOREGROUND);
+        GFX_flush();
+        sleep_ms(500);
     }
 }
 
@@ -69,16 +69,16 @@ void Terminal()
 
     for (int i = 1; i < 32; i++)
     {
-      currentLine++;
-      if (currentLine * LINE_HEIGHT > h)
-      {
-        GFX_scrollUp(LINE_HEIGHT);
-        GFX_setCursor(0, h - LINE_HEIGHT);
-        currentLine--;
-      }
-      GFX_printf("Line %d\n", i);
-      GFX_flush();
-      sleep_ms(DELAY);
+        currentLine++;
+        if (currentLine * LINE_HEIGHT > h)
+        {
+            GFX_scrollUp(LINE_HEIGHT);
+            GFX_setCursor(0, h - LINE_HEIGHT);
+            currentLine--;
+        }
+        GFX_printf("Line %d\n", i);
+        GFX_flush();
+        sleep_ms(DELAY);
     }
 }
 
@@ -87,7 +87,7 @@ int main()
     stdio_init_all();
 
     InitializeDisplay();
-    //Commodore64();
+    // Commodore64();
     Terminal();
 
     return 0;
