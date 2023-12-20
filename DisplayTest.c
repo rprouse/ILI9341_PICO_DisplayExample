@@ -13,7 +13,6 @@ void printLine(uint16_t x, uint16_t y, const char *line)
     {
       GFX_write(line[i]);
       GFX_flush();
-      sleep_ms(DELAY);
     }
 }
 
@@ -68,7 +67,7 @@ void Terminal()
     currentLine++;
     GFX_flush();
 
-    for (int i = 1; i < 50; i++)
+    for (int i = 1; i < 32; i++)
     {
       currentLine++;
       if (currentLine * LINE_HEIGHT > h)
