@@ -5,18 +5,33 @@
 #include "gfx.h"
 #include "DisplayTest.h"
 
-void printLine(uint16_t x, uint16_t y, const char *line)
+// Display the Commodore 64 screen or the Terminal
+#define COMMODORE64 1
+
+int main()
 {
-    int len = strlen(line);
-    GFX_setCursor(x, y);
-    for (int i = 0; i < len; i++)
-    {
-        GFX_write(line[i]);
-        GFX_flush();
-    }
+    stdio_init_all();
+
+#ifdef COMMODORE64
+    InitializeDisplay(FOREGROUND);
+    Commodore64();
+#else
+    InitializeDisplay(BACKGROUND);
+    Terminal();
+#endif
+
+    return 0;
 }
 
-void InitializeDisplay()
+void printLine(uint16_t line, const char *str)
+{
+    int len = strlen(str);
+    GFX_setCursor(INDENT * 2, INDENT + line * LINE_HEIGHT);
+    GFX_printf(str);
+    GFX_flush();
+}
+
+void InitializeDisplay(uint16_t color)
 {
     // Initialize display
     puts("Initializing display...");
@@ -24,12 +39,13 @@ void InitializeDisplay()
     LCD_initDisplay();
     LCD_setRotation(TFT_ROTATION);
     GFX_createFramebuf();
-    GFX_setClearColor(BACKGROUND);
+    GFX_setClearColor(color);
     GFX_setTextBack(BACKGROUND);
     GFX_setTextColor(FOREGROUND);
     GFX_clearScreen();
 }
 
+// This displays a fake Commodore 64 screen
 void Commodore64()
 {
     // Initialize GFX
@@ -39,23 +55,31 @@ void Commodore64()
 
     // Draw some text
     puts("Writing...");
-    printLine(INDENT * 2, INDENT, "    **** COMMODORE 64 BASIC V2 ****");
-    printLine(INDENT * 2, INDENT + LINE_HEIGHT, " 64K RAM SYSTEM  38911 BASIC BYTES FREE");
-    printLine(INDENT * 2, INDENT + 2 * LINE_HEIGHT, "READY.");
+    uint16_t line = 0;
+    printLine(line++, "    **** COMMODORE 64 BASIC V2 ****");
+    printLine(line++, " 64K RAM SYSTEM  38911 BASIC BYTES FREE");
+    printLine(line++, "READY.");
+    printLine(line++, "LOAD\"*\",8,1");
+    printLine(line++, "SEARCHING FOR *");
+    printLine(line++, "LOADING");
+    printLine(line++, "READY.");
+    printLine(line++, "RUN");
+    printLine(line++, "HELLO WORLD");
 
     while (true)
     {
         puts("Ping...");
-        GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, BACKGROUND);
+        GFX_fillRect(INDENT * 2, INDENT + line * LINE_HEIGHT, 6, 8, BACKGROUND);
         GFX_flush();
         sleep_ms(500);
 
-        GFX_fillRect(INDENT * 2, INDENT + 3 * LINE_HEIGHT, 6, 8, FOREGROUND);
+        GFX_fillRect(INDENT * 2, INDENT + line * LINE_HEIGHT, 6, 8, FOREGROUND);
         GFX_flush();
         sleep_ms(500);
     }
 }
 
+// This displays a scrolling terminal
 void Terminal()
 {
     int currentLine = 0;
@@ -80,15 +104,4 @@ void Terminal()
         GFX_flush();
         sleep_ms(DELAY);
     }
-}
-
-int main()
-{
-    stdio_init_all();
-
-    InitializeDisplay();
-    // Commodore64();
-    Terminal();
-
-    return 0;
 }

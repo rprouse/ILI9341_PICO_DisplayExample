@@ -43,4 +43,9 @@
 #define BACKGROUND 0x1052
 #define FOREGROUND 0x73BF
 
+void printLine(uint16_t line, const char *str);
+void InitializeDisplay(uint16_t color);
+void Commodore64();
+void Terminal();
+
 #endif
